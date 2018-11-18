@@ -4,3 +4,5 @@ library/
 test/
 *.pyc
 *.retry
+venv/
+venv2/
