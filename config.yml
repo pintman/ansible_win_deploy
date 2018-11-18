@@ -20,7 +20,7 @@
 
   - name: Copy ConfigureRemotingForAnsible.ps1 to system
     win_copy:
-      src: ConfigureRemotingForAnsible.ps1
+      src: files/ConfigureRemotingForAnsible.ps1
       dest: '%LOCALAPPDATA%\Crombeen\ConfigureRemotingForAnsible.ps1'
     tags: winrm
 
@@ -28,13 +28,15 @@
     win_scheduled_task:
       name: ConfigureRemotingForAnsible
       description: Run ConfigureRemotingForAnsible.ps1
-      executable: powershell.exe
-      arguments: -ExecutionPolicy Bypass -File "$env:LOCALAPPDATA\Crombeen\ConfigureRemotingForAnsible.ps1" -CertValidityDays 3650 -EnableCredSSP -ForceNewSSLCert
+      actions:
+      - path: powershell.exe
+        arguments: -ExecutionPolicy Bypass -File "$env:LOCALAPPDATA\Crombeen\ConfigureRemotingForAnsible.ps1" -CertValidityDays 3650 -EnableCredSSP -ForceNewSSLCert
       time: 1pm
       frequency: weekly
       days_of_week: monday
       enabled: yes
       user: SYSTEM
+      type: weekly
     tags: winrm
 
 #  - name: Run ConfigureRemotingForAnsible.ps1
@@ -98,11 +100,13 @@
     - path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
       name: LimitBlankPasswordUse
       data: 0
+      type: dword
 
     # Disable all apps from Windows Store
     - path: HKLM:\Software\Policies\Microsoft\WindowsStore
       name: DisableStoreApps
       data: 1
+      type: dword
 
     # Set primary keyboard layout to nl-BE
     - path: HKU:\.DEFAULT\Keyboard Layout\Preload
@@ -113,10 +117,12 @@
     - path: HKU:\.DEFAULT\Keyboard Layout\Preload
       name: '2'
       state: absent
+      type: dword
     # Remove tertiary keyboard layouts
     - path: HKU:\.DEFAULT\Keyboard Layout\Preload
       name: '3'
       state: absent
+      type: dword
 
     # Disable language hotkey
     #   1 = Key Sequence enabled; use LEFT ALT+SHIFT to switch between locales.
@@ -125,21 +131,27 @@
     - path: HKU:\.DEFAULT\Keyboard Layout\Toggle
       name: Language Hotkey
       data: 3
+      type: dword
     - path: HKU:\.DEFAULT\Keyboard Layout\Toggle
       name: Layout Hotkey
       data: 3
+      type: dword
     - path: HKU:\.DEFAULT\Keyboard Layout\Toggle
       name: Hotkey
       data: 3
+      type: dword
     - path: HKCU:\Keyboard Layout\Toggle
       name: Language Hotkey
       data: 3
+      type: dword
     - path: HKCU:\Keyboard Layout\Toggle
       name: Layout Hotkey
       data: 3
+      type: dword
     - path: HKCU:\Keyboard Layout\Toggle
       name: Hotkey
       data: 3
+      type: dword
 
     - path: HKCU:\Control Panel\Desktop
       name: PreferredUILanguages
@@ -156,6 +168,7 @@
     - path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer
       name: EnableAutoTray
       data: 0
+      type: dword
 
     # Do not add "-Shortcut" text to the name of newly created shortcuts.
     - path: HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer
@@ -167,51 +180,61 @@
     - path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
       name: NavPaneShowAllFolders
       data: 0
+      type: dword
 
     # Show hidden files and folders
     - path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
       name: Hidden
       data: 1
+      type: dword
 
     # Hide empty drives in My Computer folder
     - path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
       name: HideDrivesWithNoMedia
       data: 0
+      type: dword
 
     # Do not hide file extensions
     - path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
       name: HideFileExt
       data: 0
+      type: dword
 
     # Show hidden Operating System files
     - path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
       name: ShowSuperHidden
       data: 2
+      type: dword
 
     # Remove Homegroup from Explorer
     - path: HKLM:\SOFTWARE\Classes\{B4FB3F98-C1EA-428d-A78A-D1F5659CBA93}
       name: System.IsPinnedToNameSpaceTree
       data: 0
+      type: dword
 
     # Prevent "Suggested Applications" to return
     - path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
       name: DisableWindowsConsumerFeatures
       data: 1
+      type: dword
 
     # Disable Cortana (Windows 10 Anniversary+)
     - path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search
       name: AllowCortana
       data: 0
+      type: dword
 
     # Disable Microsoft Telemetry
     - path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
       name: AllowTelemetry
+      type: dword
       data: 0
 
     # Disable Game DVR and Game Bar
     - path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR
       name: AllowgameDVR
       data: 0
+      type: dword
 
     # Enable lock timeout settings
 #    - path: HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\7516b95f-f776-4464-8c53-06167f40cc99\8EC4B3A5-6868-48c2-BE75-4F3044BE88A7
@@ -222,31 +245,37 @@
     - path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
       name: ShowSyncProviderNotifications
       data: 0
+      type: dword
 
     # Do not slow down search by including all public folders
     - path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
       name: Start_SearchFiles
       data: 1
+      type: dword
 
     # Disable desktop trash bin
     - path: HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel
       name: '{645FF040-5081-101B-9F08-00AA002F954E}'
       data: 1
+      type: dword
 
     # Disable task view button in taskbar
     - path: HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced
       name: ShowTaskViewButton
       data: 0
+      type: dword
 
     # Disable people button in taskbar
     - path: HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People
       name: PeopleBand
       data: 0
+      type: dword
 
     # Show all tray icons
     - path: HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer
       name: EnableAutoTray
       data: 0
+      type: dword
 
     tags: registry
 
@@ -552,7 +581,7 @@
 - hosts: computerlokaal:extra:technieklokaal:computer53
   gather_facts: no
   tasks:
-  - name: Set timeout (monitor: 30 mins, standby: 90 mins)
+  - name: "Set timeout (monitor: 30 mins, standby: 90 mins)"
     win_shell: |
       powercfg.exe -change -monitor-timeout-ac 30
       powercfg.exe -change -standby-timeout-ac 90
@@ -561,7 +590,7 @@
 - hosts: smartboard
   gather_facts: no
   tasks:
-  - name: Set timeout (monitor: 0 mins, standby: 4 hrs)
+  - name: "Set timeout (monitor: 0 mins, standby: 4 hrs)"
     win_shell: |
       powercfg.exe -change -monitor-timeout-ac 0
       powercfg.exe -change -standby-timeout-ac 240
@@ -570,7 +599,7 @@
 - hosts: computers:!computerlokaal:!extra:!technieklokaal:!smartboard
   gather_facts: no
   tasks:
-  - name: Set timeout (monitor: 20 mins, standby: never)
+  - name: "Set timeout (monitor: 20 mins, standby: never)"
     win_shell: |
       powercfg.exe -change -monitor-timeout-ac 20
       powercfg.exe -change -standby-timeout-ac 0
