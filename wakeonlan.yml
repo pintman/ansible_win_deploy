@@ -16,13 +16,13 @@
   - name: Send magic Wake-On-Lan packet to turn on individual systems via gateway {{ wake_server }}
     win_wakeonlan:
       mac: '{{ macaddress }}'
-      broadcast: 192.168.0.255
+      broadcast: 192.168.178.255
     delegate_to: '{{ wake_server }}'
     when: wake_server is defined
 
   - wakeonlan:
       mac: '{{ macaddress }}'
-      broadcast: 192.168.0.255
+      broadcast: 192.168.178.255
     delegate_to: localhost
     when: wake_server is not defined
 
