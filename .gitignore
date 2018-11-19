@@ -6,3 +6,4 @@ test/
 *.retry
 venv/
 venv2/
+group_vars/computers.yml
