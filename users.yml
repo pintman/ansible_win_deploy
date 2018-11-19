@@ -6,9 +6,9 @@
       description: Local Users
       state: present
 
-  - name: Create local "Gebruikers" group
+  - name: Create local "Benutzer" group
     win_group:
-      name: Gebruikers
+      name: Benutzer
       description: Local Users
       state: present
 
@@ -17,7 +17,7 @@
       fullname: ICT Administrator
       name: ictadmin
       description: Used for Ansible automated tasks by the ICT Werkgroep
-#      password: '{{ ictadmin_password }}'
+      password: '{{ ictadmin_password }}'
       password_expired: no
       password_never_expires: yes
       groups: [ Administrators ]
