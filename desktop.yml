@@ -128,34 +128,34 @@
       hotkey: '{{ item.hotkey | default(omit) }}'
       state: present
     with_items:
-    - desc: ComputerMeester website
-      url: http://computermeester.be/
-      dest: '%Public%\Desktop\Computer Meester.lnk'
-      icon: '%Public%\Pictures\computermeester2.ico,0'
-      windowstyle: maximized
+#    - desc: ComputerMeester website
+#      url: http://computermeester.be/
+#      dest: '%Public%\Desktop\Computer Meester.lnk'
+#      icon: '%Public%\Pictures\computermeester2.ico,0'
+#      windowstyle: maximized
 #      args: --start-fullscreen
-    - desc: Bingel website
-      url: https://www.bingel.be/bingel/login/
-      dest: '%Public%\Desktop\Bingel.lnk'
-      icon: '%Public%\Pictures\bingel2.ico,0'
-      windowstyle: maximized
-    - desc: Symbaloo website
-      url: https://www.symbaloo.com/
-      dest: '%Public%\Desktop\Symbaloo.lnk'
-      icon: '%Public%\Pictures\symbaloo2.ico,0'
-      windowstyle: maximized
-      hotkey: Ctrl+Alt+S
+#    - desc: Bingel website
+#      url: https://www.bingel.be/bingel/login/
+#      dest: '%Public%\Desktop\Bingel.lnk'
+#      icon: '%Public%\Pictures\bingel2.ico,0'
+#      windowstyle: maximized
+#    - desc: Symbaloo website
+#      url: https://www.symbaloo.com/
+#      dest: '%Public%\Desktop\Symbaloo.lnk'
+#      icon: '%Public%\Pictures\symbaloo2.ico,0'
+#      windowstyle: maximized
+#      hotkey: Ctrl+Alt+S
 #      args: --start-fullscreen
     - desc: Scratch website
       url: https://scratch.mit.edu/projects/editor/
       dest: '%Public%\Desktop\Scratch.lnk'
       icon: '%Public%\Pictures\scratch2.ico,0'
       windowstyle: maximized
-    - desc: Kweetet website
-      url: https://www.kweetet.be/leerling
-      dest: '%Public%\Desktop\Kweetet.lnk'
-      icon: '%Public%\Pictures\kweetet3.ico,0'
-      windowstyle: maximized
+#    - desc: Kweetet website
+#      url: https://www.kweetet.be/leerling
+#      dest: '%Public%\Desktop\Kweetet.lnk'
+#      icon: '%Public%\Pictures\kweetet3.ico,0'
+#      windowstyle: maximized
     tags: shortcuts
 
   - name: Add shortcuts for all computers
@@ -344,21 +344,21 @@
 #    - shortcuts-klas
 
 # Add KeePass shortcut for all users on admin systems
-- hosts: beheer
-  tasks:
-  - name: Add KeePass shortcuts
-    win_shortcut:
-      desc: KeePass Password Safe 2
-      dest: '%Public%\Desktop\KeePass 2.lnk'
-      src: C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe
-    tags: keepass
+#- hosts: beheer
+#  tasks:
+#  - name: Add KeePass shortcuts
+#    win_shortcut:
+#      desc: KeePass Password Safe 2
+#      dest: '%Public%\Desktop\KeePass 2.lnk'
+#      src: C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe
+#    tags: keepass
 
 # Add KeePass shortcut for user ictadmin on all other systems
-- hosts: computers:!beheer
-  tasks:
-  - name: Add KeePass shortcuts
-    win_shortcut:
-      desc: KeePass Password Safe 2
-      dest: Desktop\KeePass 2.lnk
-      src: C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe
-    tags: keepass
+#- hosts: computers:!beheer
+#  tasks:
+#  - name: Add KeePass shortcuts
+#    win_shortcut:
+#      desc: KeePass Password Safe 2
+#      dest: Desktop\KeePass 2.lnk
+#      src: C:\Program Files (x86)\KeePass Password Safe 2\KeePass.exe
+#    tags: keepass
