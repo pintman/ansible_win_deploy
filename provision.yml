@@ -21,44 +21,44 @@
       execution_timeout: 0
     with_items:
     - 7zip
-    - audacity
+#    - audacity
 #    - cdex
-    - chocolateygui
-    - firefox
-    - gimp
-    - googlechrome
+#    - chocolateygui
+#    - firefox
+#    - gimp
+#    - googlechrome
 #    - googleearth
-    - infrarecorder
-    - inkscape
-    - keepass.install
-    - libreoffice-oldstable
-    - notepadplusplus
+#    - infrarecorder
+#    - inkscape
+#    - keepass.install
+#    - libreoffice-oldstable
+#    - notepadplusplus
 #    - rdpwrapper
-    - sysinternals
-    - tigervnc
-    - tipp10
-    - vlc
+#    - sysinternals
+#    - tigervnc
+#    - tipp10
+#    - vlc
     - windirstat
-    - adblockplus-firefox
-    - adblockplusie
-    - adblockpluschrome
+#    - adblockplus-firefox
+#    - adblockplusie
+#    - adblockpluschrome
     tags: software
     ignore_errors: yes
 
-  - name: Install Google Drive File Stream
-    win_chocolatey:
-      name: google-drive-file-stream
-      state: present
-      execution_timeout: 0
-      ignore_checksums: yes
-    tags: gdrive
+#  - name: Install Google Drive File Stream
+#    win_chocolatey:
+#      name: google-drive-file-stream
+#      state: present
+#      execution_timeout: 0
+#      ignore_checksums: yes
+#    tags: gdrive
 
 # TODO: Remove dropbox from systems
-- hosts: dropbox
-  tasks:
-  - name: Install dropbox
-    win_chocolatey:
-      name: dropbox
-      state: latest
-      execution_timeout: 0
-  tags: dropbox
+#- hosts: dropbox
+#  tasks:
+#  - name: Install dropbox
+#    win_chocolatey:
+#      name: dropbox
+#      state: latest
+#      execution_timeout: 0
+#  tags: dropbox
